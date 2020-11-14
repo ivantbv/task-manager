@@ -2,10 +2,12 @@ class Todos {
     constructor() {
         this.todos = []
     }
-    addTodo(name) {
+    addTodo(name, completed) {
+       
         return this.todos.push({
             name: name,
-            completed: false,
+            completed: completed,
+            completed: false
         })
     }
     addDescription(index, description) {
@@ -19,13 +21,17 @@ class Todos {
     }
     }
 
-export class EditTodos extends Todos {
+class EditTodos extends Todos {
     constructor(todos) {
         super(todos)
     }
 
     deleteTodo(index) {
         return this.todos.splice(index, 1) 
+    }
+    toggleTodo(index) {
+        const todo = this.todos[index]
+    return todo.completed = !todo.completed
     }
     editName(index, newName) {
     return this.todos[index].name = newName

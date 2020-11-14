@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    /* align-items: center; */
+    justify-items: center;
+    margin-left: 0;
+}
+
+.openNav {
+    font-size: 20px;
+    color: goldenrod;
+    
+}
+
+.navbar {
+
+
+    justify-items: start;
+    align-items: start;
+height: 100%;
+width: 250px;
+position: fixed;
+z-index: 1;
+top: 0;
+left: 0;
+background-color: rgb(94, 85, 79);
+overflow-x: hidden;
+/* padding-top: 60px; */
+}
+
+.header {
+    display: grid;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    overflow-y: hidden;
+    background-color: rgb(94, 85, 79);
+}
+
+.removed {
+    display: none;
+}
