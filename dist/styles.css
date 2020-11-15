@@ -1,8 +1,13 @@
 body {
-    display: flex;
+    display: grid;
     /* align-items: center; */
     justify-items: center;
     margin-left: 0;
+    align-items: center;
+    grid-template-areas: 
+        "a"
+        "b";
+    height: 500px;
 }
 
 .openNav {
@@ -12,8 +17,6 @@ body {
 }
 
 .navbar {
-
-
     justify-items: start;
     align-items: start;
 height: 100%;
@@ -22,22 +25,49 @@ position: fixed;
 z-index: 1;
 top: 0;
 left: 0;
-background-color: rgb(94, 85, 79);
+background-color: rgb(34, 84, 124);
 overflow-x: hidden;
 /* padding-top: 60px; */
 }
 
 .header {
     display: grid;
+
     align-items: center;
     height: 100px;
     width: 100%;
     position: fixed;
+    right: 0;
     top: 0;
     overflow-y: hidden;
-    background-color: rgb(94, 85, 79);
+    background-color: rgb(34, 84, 124);
 }
 
 .removed {
     display: none;
+}
+
+.close-nav {
+    color:yellow;
+}
+
+.project-form {
+    width: 250px;
+    height: 90px;
+    background-color: rgb(63, 77, 107);
+    align-self: center;
+    justify-self: center;
+}
+
+.project-form p {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.submit {
+    width: 40px;
+    height: 20px;
+    border: solid 2px #4000ffa3;
+    text-align: center;
+    background-color: #ad9a9ad6;
 }
