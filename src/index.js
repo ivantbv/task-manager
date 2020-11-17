@@ -1,8 +1,13 @@
 import { todos } from "/src/todos.js";
 //import {openNav, sideNav, navbar} from "/src/domManipulation.js"
-import {domManip, sideNav } from "/src/domManipulation.js"
-import {addingProjects} from "/src/addingProjects.js"
-//const addingProjects = new AddingProjects()
+import {domManip } from "/src/domManipulation.js"
+import {AddingProjects} from "/src/addingProjects.js"
+const addingProjects = new AddingProjects()
+
+const sideNav = document.querySelector('.openNav');
+const navbar = document.querySelector('.navbar');
+
+const addButton = document.querySelector('.submit')
 
 sideNav.addEventListener('click', () => {
     domManip.openNav();
@@ -10,6 +15,9 @@ sideNav.addEventListener('click', () => {
     domManip.addProject();
 })
 
+
 domManip.formClose();
 
-addingProjects.addProject();
+addButton.addEventListener('click', () => {
+    addingProjects.addProject();
+})

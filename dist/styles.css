@@ -17,8 +17,8 @@ body {
 }
 
 .navbar {
-    justify-items: start;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
 height: 100%;
 width: 250px;
 position: fixed;
@@ -70,4 +70,18 @@ overflow-x: hidden;
     border: solid 2px #4000ffa3;
     text-align: center;
     background-color: #ad9a9ad6;
+}
+
+.project {
+    align-self: center;
+    font-weight: bolder;
+    border: 1px solid darkolivegreen;
+    width: 90%;
+    height: 60px;
+    font-family: fantasy;
+    font-size: 19px;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
 }
