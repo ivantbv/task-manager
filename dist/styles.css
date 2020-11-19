@@ -80,8 +80,16 @@ overflow-x: hidden;
     height: 60px;
     font-family: fantasy;
     font-size: 19px;
-    display: grid;
-    align-content: center;
-    justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     text-align: center;
+}
+
+.delete-project {
+    order: -1;
+}
+
+.navbar-projects {
+text-align: center;
 }
