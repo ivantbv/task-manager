@@ -1,50 +1,44 @@
-class Todos {
-    constructor() {
-        this.todos = []
-    }
-    addTodo(name, completed) {
-       
-        return this.todos.push({
-            name: name,
-            completed: completed,
-            completed: false
-        })
-    }
-    addDescription(index, description) {
-        return this.todos[index].description = description
-    }
-    addPriority(index, priority) {
-        return this.todos[index].priority = priority
-    }
-    addDate(index, dueDate) {
-        return this.todos[index].dueDate = dueDate
-    }
-    }
+class Todo {
+	constructor(name, id) {
+		this.name = name;
+		this.id = id;
+		this.completed = false;
+	}
+}
 
-class EditTodos extends Todos {
-    constructor(todos) {
-        super(todos)
-    }
-
-    deleteTodo(index) {
-        return this.todos.splice(index, 1) 
-    }
-    toggleTodo(index) {
-        const todo = this.todos[index]
-    return todo.completed = !todo.completed
-    }
-    editName(index, newName) {
-    return this.todos[index].name = newName
-    }
-    editDescription(index, newDesc) {
-        return this.todos[index].description = newDesc
-    }
-    editPriority(index, newPriority) {
-        return this.todos[index].priority = newPriority
-    }
-    editDate(index, newDate) {
-        return this.todos[index].dueDate = newDate 
-    }
+class EditTodos {
+	constructor() {
+		this.todos = new Map();
+		this.id = 0;
+	}
+	addTodo(name) {
+		return this.todos.set(++this.id, new Todo(name, this.id));
+	}
+	deleteTodo(index) {
+		const todo = this.todos.get(index);
+		this.todos.delete(index); 
+		return todo;
+	}
+	toggleTodo(index) {
+		const todo = this.todos.get(index);
+		return todo.completed = !todo.completed;
+	}
+	editName(index, newName) {
+		this.todos.get(index).name = newName;
+		return newName 
+	}
+	editDescription(index, newDesc) {
+		this.todos.get(index).description = newDesc;
+		return newDesc
+	}
+	editPriority(index, newPriority) {
+		this.todos.get(index).priority = newPriority;
+		return newPriority
+	}
+	editDate(index, newDate) {
+		this.todos.get(index).dueDate = newDate;
+		return newDate 
+	}
 }
 
 const todos = new EditTodos()
