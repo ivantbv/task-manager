@@ -5,17 +5,19 @@ class DomManipulation {
         this.sideNav = document.querySelector('.openNav')
         this.navbar = document.querySelector('.navbar')
         this.closeNav = document.createElement('p')
-        this.addNewProject = document.createElement('button')
+        this.addNewProjectButton = document.createElement('button')
         this.x = document.querySelector('.x')
         this.form = document.querySelector('.project-form')
         this.closeForm = document.querySelector('.closeForm')
         this.closeNav.textContent = 'X';
-        this.addNewProject.textContent = 'Add Project'
-        this.addNewProject.classList.add('adding-project')
+        this.addNewProjectButton.textContent = 'Add Project'
+        this.addNewProjectButton.classList.add('adding-project')
         this.closeNav.classList.add('close-nav')
         this.navbar.appendChild(this.closeNav);
-        this.navbar.appendChild(this.addNewProject);
-        
+        this.navbar.appendChild(this.addNewProjectButton);
+
+        this.submitEditButton = document.querySelector('.submit-edit')
+        this.submitProjectButton = document.querySelector('.submit')
     }
 
     openNav() {
@@ -33,11 +35,13 @@ class DomManipulation {
     }
 
     addProject() {
-        if (this.addNewProject !== null) {
-        this.addNewProject.addEventListener('click', () => {
+        if (this.addNewProjectButton !== null) {
+        this.addNewProjectButton.addEventListener('click', () => {
             editProjectBool = false;
             this.form.classList.remove('removed')
 
+            this.submitEditButton.classList.add('removed')
+            this.submitProjectButton.classList.remove('removed')
            // addingProjects.showTodo();
         })
     }
@@ -46,7 +50,7 @@ class DomManipulation {
     formClose() {
         this.closeForm.addEventListener('click', () => {
             this.form.classList.toggle('removed');
-            this.addNewProject.disabled = false;
+            this.addNewProjectButton.disabled = false;
         })
     }
 }
