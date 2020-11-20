@@ -64,8 +64,16 @@ overflow-x: hidden;
     margin-top: 0;
 }
 
-.submit {
-    width: 40px;
+.submit, .submit-edit {
+    width: 60px;
+    height: 20px;
+    border: solid 2px #4000ffa3;
+    text-align: center;
+    background-color: #ad9a9ad6;
+}
+
+.submit-changed-project {
+    width: 60px;
     height: 20px;
     border: solid 2px #4000ffa3;
     text-align: center;
@@ -92,4 +100,12 @@ overflow-x: hidden;
 
 .navbar-projects {
 text-align: center;
+}
+
+.proj-form {
+    width: 250px;
+    height: 90px;
+    background-color: rgb(63, 77, 107);
+    align-self: center;
+    justify-self: center;
 }

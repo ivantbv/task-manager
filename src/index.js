@@ -10,7 +10,7 @@ const sideNav = document.querySelector('.openNav');
 const navbar = document.querySelector('.navbar');
 
 const addButton = document.querySelector('.submit')
-
+const changeProjectButton = document.querySelector('.submit-edit')
 sideNav.addEventListener('click', () => {
     domManip.openNav();
     domManip.closeNavBar();
@@ -19,39 +19,42 @@ sideNav.addEventListener('click', () => {
 
 domManip.formClose();
 
-
-
 const projectName = document.createElement('div');
 const header = document.querySelector('.header')
 
-
-
 addButton.addEventListener('click', () => {
-    
     if (editProjectBool === false) {
         addingProjects.addProject();
-   
-    }
-    if (editProjectBool === true) {
-        addingProjects.editProject()
     }
     //editProjectBool = false;
     document.querySelector('.adding-project').disabled = false;
 })
 
+// changeProjectButton.addEventListener('click', () => {
+//     if (editProjectBool === true) {
+//     addingProjects.editProject();
+//     }
+//     document.querySelector('.adding-project').disabled = false;
+// })
+
 navbar.addEventListener('click', (e) => {
+    if (e.target.tagName !== 'SPAN' && e.target.tagName === 'BUTTON') return
     const projectDiv = document.querySelectorAll('.project')
-    if (e.target.tagName !== 'SPAN') return
     
-    //let emptyArr = []
-    projectDiv.forEach(div => div.addEventListener('click', () => {
+    projectDiv.forEach(div => div.addEventListener('click', (e) => {
+        if (e.target.className === 'project') {
+            console.log('project clicked')
         projectName.textContent = div.textContent.slice(0, -2);
+        }
+        // if (e.target.tagName === 'BUTTON') {
+        //     console.log('button clicked')
+        // }
+
+        projectName.classList.add('navbar-projects')
+        header.appendChild(projectName);
     }))
         
-    //.slice(0, -2);
-    projectName.classList.add('navbar-projects')
-    header.appendChild(projectName);
-    
+   
 })
 
 // if (editProjectBool === true) {
@@ -59,5 +62,5 @@ navbar.addEventListener('click', (e) => {
 //     addingProjects.editProject()
 // }
 
-export {editProjectBool, addButton}
+export {editProjectBool, addButton, projectName}
 
