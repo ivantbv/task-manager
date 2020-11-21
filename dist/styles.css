@@ -13,7 +13,7 @@ body {
 .openNav {
     font-size: 20px;
     color: goldenrod;
-    
+    width: 220px;
 }
 
 .navbar {
@@ -31,8 +31,10 @@ overflow-x: hidden;
 }
 
 .header {
+    /* display: flex; */
     display: grid;
-
+    /* justify-content: space-between; */
+    align-content: center;
     align-items: center;
     height: 100px;
     width: 100%;
@@ -103,9 +105,16 @@ text-align: center;
 }
 
 .proj-form {
+    display: grid;
     width: 250px;
     height: 90px;
     background-color: rgb(63, 77, 107);
     align-self: center;
     justify-self: center;
+}
+
+.close-form {
+    order: -1;
+    width: 30px;
+    align-self: center;
 }
