@@ -1,4 +1,3 @@
-import {editProjectBool} from "/src/index.js"
 import {addingProjects} from "/src/addingProjects.js"
 class DomManipulation {
     constructor() {
@@ -16,7 +15,6 @@ class DomManipulation {
         this.navbar.appendChild(this.closeNav);
         this.navbar.appendChild(this.addNewProjectButton);
 
-        this.submitEditButton = document.querySelector('.submit-edit')
         this.submitProjectButton = document.querySelector('.submit')
     }
 
@@ -37,14 +35,10 @@ class DomManipulation {
     addProject() {
         if (this.addNewProjectButton !== null) {
         this.addNewProjectButton.addEventListener('click', () => {
-            editProjectBool = false;
             this.form.classList.remove('removed')
-
-            this.submitEditButton.classList.add('removed')
             this.submitProjectButton.classList.remove('removed')
-           // addingProjects.showTodo();
         })
-    }
+        }
     }
 
     formClose() {
@@ -54,16 +48,6 @@ class DomManipulation {
         })
     }
 }
-
-// const ExtractTextFromEl = {
-//     extractText: function(txt) {
-//         let children = txt.children;
-//         for (let i = children.length -1; i > -1; i--) {
-//           children[i].remove();
-//         }
-//        return txt.innerText
-//       }
-// }
 
 const domManip = new DomManipulation();
 export {domManip}

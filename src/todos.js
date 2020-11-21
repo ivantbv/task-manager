@@ -44,3 +44,16 @@ class EditTodos {
 const todos = new EditTodos()
 
 export {todos}
+
+//there should be a button that adds todos
+//when the button is clicked a form should show up
+//the form should have a field for the todo's title
+//the form should have a field for the todo's deadline
+//the form should have a field for the todo's description
+//the form should have a color/number for its priority
+
+//when added in the DOM:
+//the todo should be able to be expanded and edited in the form that
+//was used to add it
+//the non-expanded todo should have displayed its title, description,
+// delete button and toggle button (complete/incomplete)
