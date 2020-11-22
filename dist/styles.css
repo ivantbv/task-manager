@@ -45,10 +45,6 @@ overflow-x: hidden;
     background-color: rgb(34, 84, 124);
 }
 
-.removed {
-    display: none;
-}
-
 .close-nav {
     color:yellow;
 }
@@ -88,7 +84,6 @@ overflow-x: hidden;
     border: 1px solid darkolivegreen;
     width: 90%;
     height: 60px;
-    font-family: fantasy;
     font-size: 19px;
     display: flex;
     align-items: center;
@@ -117,4 +112,25 @@ text-align: center;
     order: -1;
     width: 30px;
     align-self: center;
+}
+
+.add-todos {
+    width: 220px;
+    justify-self: end;
+    color: green;
+    align-self: baseline;
+}
+
+.todos-form {
+    display: grid;
+    width: 450px;
+    height: 320px;
+    background-color: rgb(63, 77, 107);
+    align-self: center;
+    justify-self: center;
+    z-index: 1;
+}
+
+.removed {
+    display: none;
 }

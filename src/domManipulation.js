@@ -1,4 +1,5 @@
 import {addingProjects} from "/src/addingProjects.js"
+import {formTodo} from "/src/index.js"
 class DomManipulation {
     constructor() {
         this.sideNav = document.querySelector('.openNav')
@@ -37,6 +38,7 @@ class DomManipulation {
         this.addNewProjectButton.addEventListener('click', () => {
             this.form.classList.remove('removed')
             this.submitProjectButton.classList.remove('removed')
+            formTodo.classList.add('removed');
         })
         }
     }

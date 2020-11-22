@@ -1,18 +1,19 @@
 import { projectName } from "/src/index.js"
+import { todos} from "/src/todos.js"
 class AddingProjects {
     constructor() {
         this.navbar = document.querySelector('.navbar');
         this.textField = document.getElementById('name');
         this.form = document.querySelector('.project-form');
-        this.projects = new Map(); // store projects
-        this.id = 0; // current id
+        //this.projects = new Map(); // store projects
+        //this.id = 0; // current id
+        this.projects = []
         this.editForm = false;
         this.projectDiv = document.querySelector('.project')
         this.header = document.querySelector('.header');
-        this.projectName = document.createElement('div');
         this.submitProjectButton = document.querySelector('.submit')
-
         this.divToAppendForm = document.querySelector('.append-form')
+
     }
 
     addProject() {
@@ -25,14 +26,20 @@ class AddingProjects {
         const deleteProjectButton = document.createElement('button');
         deleteProjectButton.classList.add('delete-project')
         const editTitleButton = document.createElement('button');
-
-        this.projects.set(++this.id, deleteProjectButton, editTitleButton);
+        //make the below an object instead of a Map
+        //this.projects.set(++this.id, this.projectDiv.textContent);
 
         const projectDivCopy = this.projectDiv;
 
+        this.projects.push({title: this.projectDiv.textContent})
+        //now I need to push into that array the todos
+        //which will get added from the page
+        //then render them on the page
+        console.log(this.projects)
+
         deleteProjectButton.addEventListener('click', () => {
             projectDivCopy.remove();
-            document.querySelector('.navbar-projects').textContent = '';
+            projectName.textContent = '';
         });
 
         editTitleButton.addEventListener('click', () => {
@@ -76,11 +83,11 @@ class AddingProjects {
                 editTitleButton.textContent = 'E'
                 editTitleButton.classList.add('edit-project');
 
-                document.querySelector('.navbar-projects').textContent = projectDivCopy.textContent.slice(0, -2);
+                projectName.textContent = projectDivCopy.textContent.slice(0, -2);
             })
         })
 
-        document.querySelector('.navbar-projects').textContent = projectDivCopy.textContent
+        projectName.textContent = projectDivCopy.textContent
 
         this.projectDiv.appendChild(deleteProjectButton);
         deleteProjectButton.textContent = 'X';
@@ -89,6 +96,24 @@ class AddingProjects {
         editTitleButton.classList.add('edit-project');
 
         this.navbar.appendChild(projectDivCopy);
+    }
+
+    addTodoToProject() {
+          todos.addTodo()
+        //the todos.js method to add todos here
+        //then wire them wwith the add todo button on the DOM in index.js
+    }
+
+    checkProjectsSize() {
+        if (this.projects.length < 1) {
+            //hide add todos button
+        } else {
+            //show add todos button
+        }
+        //here goes the code that checks if the this.projects 
+        //is empty 
+        //if its empty then hide the button that adds todos
+        //if its not empty show the button that adds todos
     }
 }
 
