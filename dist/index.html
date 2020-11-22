@@ -12,14 +12,45 @@
         <div class="header">
             <button class="openNav">Projects</button>
             <div class="navbar-projects"></div>
+
+            <button class="add-todos">Add todo</button>
     </div>
         
     <div class="navbar removed"></div>
     <div class="x"></div>
     </header>
     
-<div class="displayed-tasks"></div>
+<div class="displayed-todos"></div>
+<!-- <div class="displayed-tasks"></div> -->
 
+<div class="removed todos-form">
+    <div class="close" style="color:red">X</div>
+    <div class="todo-title">
+    Task To Do: <br>
+    <input type="text" id="todo-title-input" maxlength="22" name="name" placehorlder="Title of the task" required>
+    </div>
+    <div class="todo-description">
+    Task's description <br>
+        <!-- <input type="text" id="todo-description-input" maxlength="100" name="description" placeholder="Description of the task"> -->
+        <textarea name="description" placeholder="description of the task" id="todo-description-input" cols="22" rows="8"></textarea>
+    </div>
+    <div class="todo-deadline">
+    Deadline: <br>
+        <input type="date" id="todo-date-input" >
+    </div>
+    Priority:
+    <div class="todo-priority">
+        <div>
+       <input type="radio" name="priority" id="high" value="High" checked>
+       <label for="High"><b>High</b></label>
+        </div>
+        <div>
+        <input type="radio" name="priority" id="low" value="Low">
+        <label for="Low"><b>Low</b></label>
+        </div>
+    </div>
+    <button class="submit-todo">Done</button>
+</div>
 <div class="append-form">
 
 <div class="project-form removed">
@@ -27,11 +58,12 @@
     <form>
         <label for="name">Title of your project</label>
         <input type="text" id="name" maxlength="20" placeholder="Enter the project's title" name="name" required>
-        <div class="submit">Add</div>
+        
     </form>
+    <div class="submit">Add</div>
+</div>
 </div>
 
-</div>
     <script type="module" src="main.js"></script>
 </body>
 </html>
