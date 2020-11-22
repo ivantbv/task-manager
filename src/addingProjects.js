@@ -1,7 +1,8 @@
 import { projectName } from "/src/index.js"
-import { todos} from "/src/todos.js"
-class AddingProjects {
-    constructor() {
+import { Todos} from "/src/todos.js"
+class AddingProjects extends Todos {
+    constructor(todos) {
+        super(todos)
         this.navbar = document.querySelector('.navbar');
         this.textField = document.getElementById('name');
         this.form = document.querySelector('.project-form');
@@ -31,12 +32,12 @@ class AddingProjects {
 
         const projectDivCopy = this.projectDiv;
 
-        this.projects.push({title: this.projectDiv.textContent})
-        //now I need to push into that array the todos
-        //which will get added from the page
-        //then render them on the page
+        this.projects.push({title: this.projectDiv.textContent, todo: this.todos})
         console.log(this.projects)
-
+        //AWESOME ^ it logs the projects with the todos array
+        //next i need to think of how to manage each todo in its own
+        //corresponding project
+        //and wire with the dom
         deleteProjectButton.addEventListener('click', () => {
             projectDivCopy.remove();
             projectName.textContent = '';
@@ -99,7 +100,7 @@ class AddingProjects {
     }
 
     addTodoToProject() {
-          todos.addTodo()
+          this.addTodo()
         //the todos.js method to add todos here
         //then wire them wwith the add todo button on the DOM in index.js
     }

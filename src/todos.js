@@ -1,4 +1,4 @@
-class Todos {
+export class Todos {
 	constructor() {
 		this.todos = [];
 		//this.id = 0
@@ -14,7 +14,7 @@ class Todos {
 	addTodo(completed) {
 		this.todosContainerDiv = document.createElement('div')
 		this.todosContainerDiv.classList.add('todos-container');
-		
+
 		const date = new Date(this.taskDateInput.value)
 		const day = date.getUTCDate()
 		const month = date.getUTCMonth()
@@ -41,7 +41,7 @@ class Todos {
 		this.todoPriorityDiv.textContent = priorityValue
 
 		this.todos.push({
-			name: this.taskToDoInput.vale,
+			name: this.taskToDoInput.value,
 			description: this.taskDescriptionInput.value,
 			priority: radioBtnValue,
 			date: fullDateFromInput,
