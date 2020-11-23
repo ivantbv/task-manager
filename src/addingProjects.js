@@ -1,12 +1,14 @@
 import { projectName } from "/src/index.js"
-import { todos} from "/src/todos.js"
-class AddingProjects {
-    constructor() {
+import { Todos} from "/src/todos.js"
+
+class AddingProjects extends Todos {
+    constructor(todos) {
+        super(todos)
         this.navbar = document.querySelector('.navbar');
         this.textField = document.getElementById('name');
         this.form = document.querySelector('.project-form');
         //this.projects = new Map(); // store projects
-        //this.id = 0; // current id
+        this.id = 0; // current id
         this.projects = []
         this.editForm = false;
         this.projectDiv = document.querySelector('.project')
@@ -26,22 +28,29 @@ class AddingProjects {
         const deleteProjectButton = document.createElement('button');
         deleteProjectButton.classList.add('delete-project')
         const editTitleButton = document.createElement('button');
-        //make the below an object instead of a Map
-        //this.projects.set(++this.id, this.projectDiv.textContent);
 
+        deleteProjectButton.setAttribute('data-id', ++this.id)
+        console.log(deleteProjectButton, 'from add project')
         const projectDivCopy = this.projectDiv;
 
-        this.projects.push({title: this.projectDiv.textContent})
-        //now I need to push into that array the todos
-        //which will get added from the page
-        //then render them on the page
-        console.log(this.projects)
+        this.projects.push({title: projectDivCopy.textContent, todo: this.todos, id: deleteProjectButton.dataset.id})
+        console.log(this.projects, 'from addproject to check ID')
+        //now it logs the projects with the todos array
+        //next i need to think of how to manage each todo in its own
+        //corresponding project
+        //and wire with the dom
 
-        deleteProjectButton.addEventListener('click', () => {
+        deleteProjectButton.addEventListener('click', (e) => {
+        //this.projects = this.projects.reduce((p,c) => (c !== projectDivCopy.textContent && p.push(c),p),[]);
+            
+        this.projects = this.projects
+        .filter(project => project.id !== e.target.getAttribute('data-id'))
+
             projectDivCopy.remove();
             projectName.textContent = '';
-        });
 
+            console.log(this.projects, 'from del button');
+        });
         editTitleButton.addEventListener('click', () => {
             this.form.classList.add('removed')
             document.querySelector('.adding-project').disabled = true;
@@ -89,9 +98,9 @@ class AddingProjects {
 
         projectName.textContent = projectDivCopy.textContent
 
-        this.projectDiv.appendChild(deleteProjectButton);
+        projectDivCopy.appendChild(deleteProjectButton);
         deleteProjectButton.textContent = 'X';
-        this.projectDiv.appendChild(editTitleButton)
+        projectDivCopy.appendChild(editTitleButton)
         editTitleButton.textContent = 'E'
         editTitleButton.classList.add('edit-project');
 
@@ -99,7 +108,7 @@ class AddingProjects {
     }
 
     addTodoToProject() {
-          todos.addTodo()
+          this.addTodo()
         //the todos.js method to add todos here
         //then wire them wwith the add todo button on the DOM in index.js
     }
