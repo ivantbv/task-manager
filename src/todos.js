@@ -1,19 +1,26 @@
 export class Todos {
 	constructor() {
 		this.todos = [];
-		//this.id = 0
+		this.id = 0
 		this.taskToDoInput = document.querySelector('#todo-title-input')
 		this.taskDescriptionInput = document.querySelector('#todo-description-input')
 		this.taskDateInput = document.querySelector('#todo-date-input')
 		this.taskPriorityInput = document.querySelectorAll('input[name="priority"]')
 		this.appendTodoDiv = document.querySelector('.displayed-todos')
-		
 	}
-	//probably need to nest this class or its method and constructor
-	//OR EXTEND it into AddingPRojects
-	addTodo(completed) {
+
+	addTodo() {
+		//this.todos.completed;
 		this.todosContainerDiv = document.createElement('div')
 		this.todosContainerDiv.classList.add('todos-container');
+
+		this.completeCheckbox = document.createElement('input')
+		this.completeCheckbox.type = 'checkbox'
+		this.completeCheckbox.classList.add('complete-checkbox')
+
+		this.deleteTodoBtn = document.createElement('button');
+		this.deleteTodoBtn.classList.add('delete-todo-btn');
+		this.deleteTodoBtn.textContent = 'X';
 
 		const date = new Date(this.taskDateInput.value)
 		const day = date.getUTCDate()
@@ -27,8 +34,28 @@ export class Todos {
 				radioBtnValue = radioBtn.value
 			}
 		}
-
 		const priorityValue = `${radioBtnValue} priority`
+
+		this.deleteTodoBtn.setAttribute('data-id', ++this.id)
+		console.log(this.deleteTodoBtn, 'from addTodo')
+
+		const todosContainerDivCopy = this.todosContainerDiv
+
+		this.todos.push({
+			name: this.taskToDoInput.value,
+			description: this.taskDescriptionInput.value,
+			priority: radioBtnValue,
+			date: fullDateFromInput,
+			id: this.deleteTodoBtn.dataset.id
+		})
+
+		this.deleteTodoBtn.addEventListener('click', (e) => {
+			this.todos = this.todos
+		.filter(todo => todo.id !== e.target.getAttribute('data-id'))
+		
+			todosContainerDivCopy.remove()
+			console.log(this.todos, 'from del todo btns')
+		})
 
 		this.todoTitleDiv = document.createElement('div')
 		this.todoDescriptionDiv = document.createElement('div')
@@ -40,32 +67,33 @@ export class Todos {
 		this.todoDateDiv.textContent = fullDateFromInput
 		this.todoPriorityDiv.textContent = priorityValue
 
-		this.todos.push({
-			name: this.taskToDoInput.value,
-			description: this.taskDescriptionInput.value,
-			priority: radioBtnValue,
-			date: fullDateFromInput,
-			completed: completed,
-			completed: false,
-			//id: ++this.id
-		})
-		console.log(this.todos);
-		//this.todoDiv.appendChild(this.todos)
-		this.todosContainerDiv.appendChild(this.todoTitleDiv);
-		this.todosContainerDiv.appendChild(this.todoDescriptionDiv)
-		this.todosContainerDiv.appendChild(this.todoDateDiv)
-		this.todosContainerDiv.appendChild(this.todoPriorityDiv)
 
-		this.appendTodoDiv.appendChild(this.todosContainerDiv)
-	}
-	addDescription(index, description) {
-		return this.todos[index].description = description
-	}
-	addPriority(index, priority) {
-		return this.todos[index].priority = priority
-	}
-	addDate(index, dueDate) {
-		return this.todos[index].dueDate = dueDate
+
+		this.completeCheckbox.addEventListener('click', (e) => {	
+			if (e.target.checked) {
+			todosContainerDivCopy.style.textDecoration = 'line-through'
+			//change it to the copy variable i made
+			console.log(this.todos)
+		} else if (!e.target.checked) {
+			//this too! 	
+			todosContainerDivCopy.style.textDecoration = 'none';
+				console.log(this.todos);
+			}
+		})
+
+	
+
+		console.log(this.todos);
+	
+		//this.todoDiv.appendChild(this.todos)
+		todosContainerDivCopy.appendChild(this.todoTitleDiv);
+		todosContainerDivCopy.appendChild(this.todoDescriptionDiv);
+		todosContainerDivCopy.appendChild(this.todoDateDiv);
+		todosContainerDivCopy.appendChild(this.todoPriorityDiv);
+		todosContainerDivCopy.appendChild(this.completeCheckbox);
+		todosContainerDivCopy.appendChild(this.deleteTodoBtn);
+
+		this.appendTodoDiv.appendChild(todosContainerDivCopy)
 	}
 }
 
@@ -93,6 +121,13 @@ class EditTodos extends Todos {
 	// 	return this.todos[index].dueDate = newDate
 	// }
 }
+
+function strikeThrough(text) {
+	return text
+	  .split('')
+	  .map(char => char + '\u0336')
+	  .join('')
+  }
 
 const todos = new Todos()
 
