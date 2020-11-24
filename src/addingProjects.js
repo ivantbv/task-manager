@@ -8,7 +8,7 @@ class AddingProjects extends Todos {
         this.textField = document.getElementById('name');
         this.form = document.querySelector('.project-form');
         //this.projects = new Map(); // store projects
-        this.id = 0; // current id
+        this.id = 0;
         this.projects = []
         this.editForm = false;
         this.projectDiv = document.querySelector('.project')
@@ -35,7 +35,6 @@ class AddingProjects extends Todos {
 
         this.projects.push({title: projectDivCopy.textContent, todo: this.todos, id: deleteProjectButton.dataset.id})
         console.log(this.projects, 'from addproject to check ID')
-        //now it logs the projects with the todos array
         //next i need to think of how to manage each todo in its own
         //corresponding project
         //and wire with the dom

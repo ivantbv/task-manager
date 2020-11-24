@@ -121,6 +121,13 @@ text-align: center;
     align-self: baseline;
 }
 
+.clear-all-todos {
+    width: 220px;
+    justify-self: end;
+    color: red;
+    align-self: baseline;
+}
+
 .todos-form {
     display: grid;
     width: 450px;

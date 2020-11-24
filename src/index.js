@@ -1,6 +1,8 @@
-import { todos } from "/src/todos.js";
+import { Todos } from "/src/todos.js";
 import { domManip } from "/src/domManipulation.js"
 import { addingProjects, projects } from "/src/addingProjects.js"
+import { todos } from "/src/todos.js";
+//import { todos } from "./todos";
 
 const sideNav = document.querySelector('.openNav');
 const navbar = document.querySelector('.navbar');
@@ -8,6 +10,8 @@ const addTodoButton = document.querySelector('.add-todos')
 const formTodo = document.querySelector('.todos-form')
 const addButton = document.querySelector('.submit')
 const submitTodo = document.querySelector('.submit-todo');
+const clearAllTodos = document.querySelector('.clear-all-todos')
+const displayedTodosContainer = document.querySelector('.displayed-todos')
 
 sideNav.addEventListener('click', () => {
     domManip.openNav();
@@ -46,5 +50,6 @@ addTodoButton.addEventListener('click', () => {
     formTodo.classList.toggle('removed');
     document.querySelector('.project-form').classList.add('removed');
 })
-export { addButton, projectName, formTodo }
+
+export { addButton, projectName, formTodo, clearAllTodos, displayedTodosContainer }
 
