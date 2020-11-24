@@ -1,3 +1,11 @@
+import {displayedTodosContainer} from "/src/index.js"
+
+Date.prototype.toDateInputValue = (function() {
+    let local = new Date(this);
+    local.setUTCMinutes(this.getUTCMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+});
+
 export class Todos {
 	constructor() {
 		this.todos = [];
@@ -5,8 +13,14 @@ export class Todos {
 		this.taskToDoInput = document.querySelector('#todo-title-input')
 		this.taskDescriptionInput = document.querySelector('#todo-description-input')
 		this.taskDateInput = document.querySelector('#todo-date-input')
+		this.taskDateInput.valueAsDate = new Date();
 		this.taskPriorityInput = document.querySelectorAll('input[name="priority"]')
 		this.appendTodoDiv = document.querySelector('.displayed-todos')
+		this.header = document.querySelector('.header');
+		
+		this.clearAllTodos = document.createElement('button')
+		this.clearAllTodos.textContent = 'Clear All Todos'
+		this.clearAllTodos.classList.add('clear-all-todos')
 	}
 
 	addTodo() {
@@ -22,9 +36,10 @@ export class Todos {
 		this.deleteTodoBtn.classList.add('delete-todo-btn');
 		this.deleteTodoBtn.textContent = 'X';
 
+
 		const date = new Date(this.taskDateInput.value)
 		const day = date.getUTCDate()
-		const month = date.getUTCMonth()
+		const month = date.getUTCMonth() + 1;
 		const year = date.getUTCFullYear()
 		const fullDateFromInput = `Deadline: ${[day, month, year].join('/')}`
 
@@ -54,6 +69,10 @@ export class Todos {
 		.filter(todo => todo.id !== e.target.getAttribute('data-id'))
 		
 			todosContainerDivCopy.remove()
+
+			if (this.todos.length === 0) {
+				this.clearAllTodos.remove()
+			}
 			console.log(this.todos, 'from del todo btns')
 		})
 
@@ -81,10 +100,8 @@ export class Todos {
 			}
 		})
 
-	
-
 		console.log(this.todos);
-	
+
 		//this.todoDiv.appendChild(this.todos)
 		todosContainerDivCopy.appendChild(this.todoTitleDiv);
 		todosContainerDivCopy.appendChild(this.todoDescriptionDiv);
@@ -94,53 +111,51 @@ export class Todos {
 		todosContainerDivCopy.appendChild(this.deleteTodoBtn);
 
 		this.appendTodoDiv.appendChild(todosContainerDivCopy)
+
+		this.clearAllTodos.addEventListener('click', () => {
+			while (displayedTodosContainer.hasChildNodes()) {
+				displayedTodosContainer.removeChild(displayedTodosContainer.firstChild)
+			}
+			
+			this.todos = [];
+
+			if (this.todos.length === 0) {
+				this.clearAllTodos.remove()
+			}
+			console.log(this.todos, 'after splicing')
+		})
+
+		this.header.appendChild(this.clearAllTodos)
+
 	}
 }
 
-class EditTodos extends Todos {
-	constructor(todos) {
-		super(todos)
-	}
-	deleteTodo(index) {
-		return this.todos.splice(index, 1)
-	}
-	toggleTodo(index) {
-		const todo = this.todos[index]
-		return todo.completed = !todo.completed
-	}
-	editName(index, newName) {
-		return this.todos[index].name = newName
-	}
-	// editDescription(index, newDesc) {
-	// 	return this.todos[index].description = newDesc
-	// }
-	// editPriority(index, newPriority) {
-	// 	return this.todos[index].priority = newPriority
-	// }
-	// editDate(index, newDate) {
-	// 	return this.todos[index].dueDate = newDate
-	// }
-}
-
-function strikeThrough(text) {
-	return text
-	  .split('')
-	  .map(char => char + '\u0336')
-	  .join('')
-  }
+// class EditTodos extends Todos {
+// 	constructor(todos) {
+// 		super(todos)
+// 	}
+// 	deleteTodo(index) {
+// 		return this.todos.splice(index, 1)
+// 	}
+// 	toggleTodo(index) {
+// 		const todo = this.todos[index]
+// 		return todo.completed = !todo.completed
+// 	}
+// 	editName(index, newName) {
+// 		return this.todos[index].name = newName
+// 	}
+// }
 
 const todos = new Todos()
 
 export { todos }
 
-//there should be a button that adds todos
-//when the button is clicked a form should show up
-//the form should have a field for the todo's title
-//the form should have a field for the todo's deadline
-//the form should have a field for the todo's description
-//the form should have a color/number for its priority
+//whats left:
+//sync the projects array of objects when a projects name is edited
+//same for the todos array when i add an edit button
+//
 
-//when added in the DOM:
+//when todo is added in the DOM:
 //the todo should be able to be expanded and edited in the form that
 //was used to add it
 //the non-expanded todo should have displayed its title, description,
