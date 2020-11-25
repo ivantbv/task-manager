@@ -36,13 +36,14 @@ export class Todos {
 		this.deleteTodoBtn.classList.add('delete-todo-btn');
 		this.deleteTodoBtn.textContent = 'X';
 
-
+		//getting the date's value from the input
 		const date = new Date(this.taskDateInput.value)
 		const day = date.getUTCDate()
 		const month = date.getUTCMonth() + 1;
 		const year = date.getUTCFullYear()
 		const fullDateFromInput = `Deadline: ${[day, month, year].join('/')}`
 
+		//getting the value from the radio buttons
 		let radioBtnValue;
 		for (const radioBtn of this.taskPriorityInput) {
 			if (radioBtn.checked) {
@@ -51,6 +52,7 @@ export class Todos {
 		}
 		const priorityValue = `${radioBtnValue} priority`
 
+		//setting a data attribute to the del btn equal to the id
 		this.deleteTodoBtn.setAttribute('data-id', ++this.id)
 		console.log(this.deleteTodoBtn, 'from addTodo')
 
@@ -86,23 +88,18 @@ export class Todos {
 		this.todoDateDiv.textContent = fullDateFromInput
 		this.todoPriorityDiv.textContent = priorityValue
 
-
-
 		this.completeCheckbox.addEventListener('click', (e) => {	
 			if (e.target.checked) {
 			todosContainerDivCopy.style.textDecoration = 'line-through'
 			//change it to the copy variable i made
 			console.log(this.todos)
-		} else if (!e.target.checked) {
-			//this too! 	
+		} else if (!e.target.checked) {	
 			todosContainerDivCopy.style.textDecoration = 'none';
 				console.log(this.todos);
 			}
 		})
 
 		console.log(this.todos);
-
-		//this.todoDiv.appendChild(this.todos)
 		todosContainerDivCopy.appendChild(this.todoTitleDiv);
 		todosContainerDivCopy.appendChild(this.todoDescriptionDiv);
 		todosContainerDivCopy.appendChild(this.todoDateDiv);
@@ -118,7 +115,6 @@ export class Todos {
 			}
 			
 			this.todos = [];
-
 			if (this.todos.length === 0) {
 				this.clearAllTodos.remove()
 			}
@@ -141,9 +137,6 @@ export class Todos {
 // 		const todo = this.todos[index]
 // 		return todo.completed = !todo.completed
 // 	}
-// 	editName(index, newName) {
-// 		return this.todos[index].name = newName
-// 	}
 // }
 
 const todos = new Todos()
@@ -151,9 +144,7 @@ const todos = new Todos()
 export { todos }
 
 //whats left:
-//sync the projects array of objects when a projects name is edited
-//same for the todos array when i add an edit button
-//
+//sync the todos array of objects when a todos name is edited
 
 //when todo is added in the DOM:
 //the todo should be able to be expanded and edited in the form that

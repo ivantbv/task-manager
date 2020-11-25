@@ -30,7 +30,8 @@ class AddingProjects extends Todos {
         const editTitleButton = document.createElement('button');
 
         deleteProjectButton.setAttribute('data-id', ++this.id)
-        console.log(deleteProjectButton, 'from add project')
+        editTitleButton.setAttribute('data-id', deleteProjectButton.dataset.id)
+        console.log(editTitleButton, 'from adding project')
         const projectDivCopy = this.projectDiv;
 
         this.projects.push({title: projectDivCopy.textContent, todo: this.todos, id: deleteProjectButton.dataset.id})
@@ -39,18 +40,15 @@ class AddingProjects extends Todos {
         //corresponding project
         //and wire with the dom
 
-        deleteProjectButton.addEventListener('click', (e) => {
-        //this.projects = this.projects.reduce((p,c) => (c !== projectDivCopy.textContent && p.push(c),p),[]);
-            
+        deleteProjectButton.addEventListener('click', (e) => {            
         this.projects = this.projects
         .filter(project => project.id !== e.target.getAttribute('data-id'))
 
             projectDivCopy.remove();
             projectName.textContent = '';
-
             console.log(this.projects, 'from del button');
         });
-        editTitleButton.addEventListener('click', () => {
+        editTitleButton.addEventListener('click', (e) => {
             this.form.classList.add('removed')
             document.querySelector('.adding-project').disabled = true;
 
@@ -79,8 +77,17 @@ class AddingProjects extends Todos {
             })
 
             this.changeProjectButton.addEventListener('click', () => {
+                //update this.projects array with the new title
+                for (let i in this.projects) {
+                    if (this.projects[i].id == e.target.getAttribute('data-id')) {
+                       this.projects[i].title = this.editProjectInputField.value;
+                       break;
+                    }
+                  }
+                  console.log(this.projects)
+                /////
                 projectDivCopy.textContent = this.editProjectInputField.value
-                //this.form.classList.add('removed');
+
                 this.formDiv.remove();
                 this.editProjectInputField.value = '';
                 document.querySelector('.adding-project').disabled = false;
@@ -125,6 +132,17 @@ class AddingProjects extends Todos {
     }
 }
 
+
+
 const addingProjects = new AddingProjects()
+
+function changeDesc( value, desc ) {
+    for (let i in this.todos) {
+      if (this.todos[i].value == value) {
+         this.todos[i].desc = desc;
+         break;
+      }
+    }
+ }
 
 export { addingProjects }
