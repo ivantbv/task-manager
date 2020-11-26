@@ -26,6 +26,34 @@
 <div class="displayed-tasks"></div>
 <div class="displayed-todos"></div>
 
+<div class="removed edit-todos-form">
+    <div class="close" style="color:red">X</div>
+    <div class="change-todo-title">
+    Change title: <br>
+    <input type="text" id="change-title-input" maxlength="22" name="name" placehorlder="Title of the task" required>
+    </div>
+    <div class="change-todo-description">
+    Change description <br>
+        <textarea name="change-description" placeholder="description of the task" id="change-description-input" cols="22" rows="8"></textarea>
+    </div>
+    <div class="change-todo-deadline">
+    Deadline: <br>
+        <input type="date" id="change-date-input" >
+    </div>
+    Priority:
+    <div class="change-todo-priority">
+        <div>
+       <input type="radio" name="change-priority" id="change-high" value="High">
+       <label for="High"><b>High</b></label>
+        </div>
+        <div>
+        <input type="radio" name="change-priority" id="change-low" value="Low">
+        <label for="Low"><b>Low</b></label>
+        </div>
+    </div>
+
+</div>
+
 <div class="removed todos-form">
     <div class="close" style="color:red">X</div>
     <div class="todo-title">

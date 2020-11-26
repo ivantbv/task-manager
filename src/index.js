@@ -2,7 +2,6 @@ import { Todos } from "/src/todos.js";
 import { domManip } from "/src/domManipulation.js"
 import { addingProjects, projects } from "/src/addingProjects.js"
 import { todos } from "/src/todos.js";
-//import { todos } from "./todos";
 
 const sideNav = document.querySelector('.openNav');
 const navbar = document.querySelector('.navbar');
@@ -18,15 +17,14 @@ sideNav.addEventListener('click', () => {
     domManip.closeNavBar();
     domManip.addProject();
 })
-
 domManip.formClose();
+
 const projectName = document.querySelector('.navbar-projects');
 const header = document.querySelector('.header')
 
 addButton.addEventListener('click', () => {
     addingProjects.addProject();
     document.querySelector('.adding-project').disabled = false;
-
 })
 
 submitTodo.addEventListener('click', () => {
@@ -41,7 +39,6 @@ navbar.addEventListener('click', (e) => {
             console.log('project clicked')
             projectName.textContent = div.textContent.slice(0, -2);
         }
-
         header.appendChild(projectName);
     }))
 })
@@ -51,5 +48,5 @@ addTodoButton.addEventListener('click', () => {
     document.querySelector('.project-form').classList.add('removed');
 })
 
-export { addButton, projectName, formTodo, clearAllTodos, displayedTodosContainer }
+export { addButton, projectName, formTodo, submitTodo, clearAllTodos, displayedTodosContainer }
 

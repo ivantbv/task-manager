@@ -128,7 +128,7 @@ text-align: center;
     align-self: baseline;
 }
 
-.todos-form {
+.todos-form, .edit-todos-form {
     display: grid;
     width: 450px;
     height: 320px;
