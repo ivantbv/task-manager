@@ -115,34 +115,9 @@ class AddingProjects extends Todos {
 
     addTodoToProject() {
           this.addTodo()
-        //the todos.js method to add todos here
-        //then wire them wwith the add todo button on the DOM in index.js
-    }
-
-    checkProjectsSize() {
-        if (this.projects.length < 1) {
-            //hide add todos button
-        } else {
-            //show add todos button
-        }
-        //here goes the code that checks if the this.projects 
-        //is empty 
-        //if its empty then hide the button that adds todos
-        //if its not empty show the button that adds todos
     }
 }
 
-
-
 const addingProjects = new AddingProjects()
-
-function changeDesc( value, desc ) {
-    for (let i in this.todos) {
-      if (this.todos[i].value == value) {
-         this.todos[i].desc = desc;
-         break;
-      }
-    }
- }
 
 export { addingProjects }
