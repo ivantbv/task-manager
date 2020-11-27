@@ -20,7 +20,7 @@ export class Todos {
 		this.header = document.querySelector('.header');
 		
 		//to edit todo
-		this.editTitleIput = document.querySelector('#change-title-input')
+		this.editTitleInput = document.querySelector('#change-title-input')
 		this.editDescriptionInput = document.querySelector('#change-description-input')
 		this.editDateInput = document.querySelector('#change-date-input')
 		this.editPriorityInput = document.querySelectorAll('input[name="change-priority"')
@@ -58,7 +58,7 @@ export class Todos {
 		const day = date.getUTCDate()
 		const month = date.getUTCMonth() + 1;
 		const year = date.getUTCFullYear()
-		const fullDateFromInput = `Deadline: ${[day, month, year].join('/')}`
+		const fullDateFromInput = [year, `${minTwoDigits(month)}`, `${minTwoDigits(day)}`].join('-')
 
 		//getting the value from the radio buttons
 		let radioBtnValue;
@@ -76,8 +76,6 @@ export class Todos {
 		console.log(this.deleteTodoBtn, 'from addTodo')
 
 		const todosContainerDivCopy = this.todosContainerDiv
-		//GIVE A CLASSNAME FOR THE CONTAINER'S CHILDREN ^ 
-		//SO I CAN SELECT THEM FOR THE EDITING FORM
 
 		this.todos.push({
 			name: this.taskToDoInput.value,
@@ -113,74 +111,14 @@ export class Todos {
 		const todoDescriptionCopy = this.todoDescriptionDiv
 		const todoDateInputCopy = this.taskDateInput.value
 		const todoPriorityCopy = this.taskPriorityInput;
+		//^actually using the this.todos array to get the values
 		
-
-
 		//set the todo's card text depending on the input
 		this.todoTitleDiv.textContent = this.taskToDoInput.value
 		this.todoDescriptionDiv.textContent = this.taskDescriptionInput.value
-		this.todoDateDiv.textContent = fullDateFromInput
+		this.todoDateDiv.textContent = `Deadline: ${fullDateFromInput}`
 		this.todoPriorityDiv.textContent = priorityValue
 
-		const todoPriorityDivCopy = this.todoPriorityDiv
-		
-
-	// 	let copyRadioBtn
-	// 	todoPriorityCopy.forEach(btn => {
-	// 		if (btn.checked) {
-	// 			if (btn.value === 'Low') {
-											
-	// 				for (const radioButton of this.editPriorityInput) {
-	// 					const lowRadio = document.querySelector('input[value="Low"]')
-	// 					lowRadio.checked = true
-	// 					copyRadioBtn = lowRadio
-	// 				}
-	// 			} else if (btn.value === 'High') {
-	// 				for (const radioButton of this.editPriorityInput) {
-	// 					const highRadio = document.querySelector('input[value="High"]')
-	// 					highRadio.checked = true
-	// 					copyRadioBtn = highRadio
-	// 				}
-	// 			}
-	// 		}
-	// 	})
-	// console.log(copyRadioBtn.checked, 'ads')
-
-	const lowPriorityBtn = document.getElementById('change-low')
-	const highPriorityBtn = document.getElementById('change-high')
-
-		this.editTodoBtn.addEventListener('click', (e) => {
-			this.containerEditTodo.classList.toggle('removed');
-			this.containerEditTodo.appendChild(this.submitChangedTodoBtn)
-			// ^ add eventListener for it so that changes appear in
-			//the corresponding todos card
-
-			this.editTitleIput.value = todoTitleCopy.textContent;
-			this.editDescriptionInput.value = todoDescriptionCopy.textContent;
-			this.editDateInput.value = todoDateInputCopy
-
-			// if (todoPriorityDivCopy.textContent === 'High priority') {
-			// 	//check the high priority radiobutton in edit form
-			// } else if (todoPriorityDivCopy.textContent === 'Low priority') {
-
-			// }
-
-			for (let i in this.todos) {
-				if (this.todos[i].id === e.target.getAttribute('data-id')) {
-					console.log(this.todos[i].priority === 'High', 'from for in');
-					if (this.todos[i].priority === 'Low') {
-						lowPriorityBtn.checked = true
-						break;
-					} else if (this.todos[i].priority === 'High') {
-						highPriorityBtn.checked = true
-						break
-					}
-				}
-			  }
-
-			console.log(lowPriorityBtn, highPriorityBtn)
-
-		})
 
 		this.completeCheckbox.addEventListener('click', (e) => {	
 			if (e.target.checked) {
@@ -203,6 +141,12 @@ export class Todos {
 
 		this.appendTodoDiv.appendChild(todosContainerDivCopy)
 
+		//reset the form's fields on next open
+		this.taskToDoInput.value = ''
+		this.taskDescriptionInput.value = '';
+		//reset the date to today's date as well
+		/////
+
 		this.clearAllTodos.addEventListener('click', () => {
 			while (displayedTodosContainer.hasChildNodes()) {
 				displayedTodosContainer.removeChild(displayedTodosContainer.firstChild)
@@ -212,7 +156,6 @@ export class Todos {
 			if (this.todos.length === 0) {
 				this.clearAllTodos.remove()
 			}
-			console.log(this.todos, 'after splicing')
 		})
 
 		this.header.appendChild(this.clearAllTodos)
@@ -220,18 +163,53 @@ export class Todos {
 	}
 }
 
-// class EditTodos extends Todos {
-// 	constructor(todos) {
-// 		super(todos)
-// 	}
-// 	deleteTodo(index) {
-// 		return this.todos.splice(index, 1)
-// 	}
-// 	toggleTodo(index) {
-// 		const todo = this.todos[index]
-// 		return todo.completed = !todo.completed
-// 	}
-// }
+export class EditTodos extends Todos {
+	constructor(todos) {
+		super(todos)
+	}
+	// toggleTodo(index) {
+	// 	const todo = this.todos[index]
+	// 	return todo.completed = !todo.completed
+	// }
+
+	editTodos() {
+		const lowPriorityBtn = document.getElementById('change-low')
+		const highPriorityBtn = document.getElementById('change-high')
+
+		this.editTodoBtn.addEventListener('click', (e) => {
+			this.containerEditTodo.classList.toggle('removed');
+			this.containerEditTodo.appendChild(this.submitChangedTodoBtn)
+			// ^ add eventListener for it so that changes appear in
+			//the corresponding todos card
+
+			//this.editTitleInput.value = todoTitleCopy.textContent;
+			// this.editDateInput.value = todoDateInputCopy
+
+			for (let i in this.todos) {
+				if (this.todos[i].id === e.target.getAttribute('data-id')) {
+					this.editTitleInput.value = this.todos[i].name;
+					this.editDescriptionInput.value = this.todos[i].description
+					this.editDateInput.value = this.todos[i].date
+					console.log(this.todos[i].date)
+
+					if (this.todos[i].priority === 'Low') {
+						lowPriorityBtn.checked = true
+						break;
+					} else if (this.todos[i].priority === 'High') {
+						highPriorityBtn.checked = true
+						break
+					}
+				}
+			  }
+
+		})
+	}
+
+}
+
+function minTwoDigits(n) {
+	return (n < 10 ? '0' : '') + n;
+  }
 
 const todos = new Todos()
 

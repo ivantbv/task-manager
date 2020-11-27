@@ -1,7 +1,7 @@
 import { projectName } from "/src/index.js"
-import { Todos} from "/src/todos.js"
+import { Todos, EditTodos} from "/src/todos.js"
 
-class AddingProjects extends Todos {
+class AddingProjects extends EditTodos {
     constructor(todos) {
         super(todos)
         this.navbar = document.querySelector('.navbar');
@@ -115,6 +115,7 @@ class AddingProjects extends Todos {
 
     addTodoToProject() {
           this.addTodo()
+          this.editTodos()
     }
 }
 
