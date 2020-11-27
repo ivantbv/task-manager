@@ -116,6 +116,7 @@ class AddingProjects extends EditTodos {
     addTodoToProject() {
           this.addTodo()
           this.editTodos()
+          this.deleteTodos()
     }
 }
 
