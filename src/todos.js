@@ -73,7 +73,10 @@ export class Todos {
 		this.deleteTodoBtn.setAttribute('data-id', ++this.id)
 
 		this.editTodoBtn.setAttribute('data-id', this.deleteTodoBtn.dataset.id)
-		console.log(this.deleteTodoBtn, 'from addTodo')
+
+		this.submitChangedTodoBtn.setAttribute('data-id', this.editTodoBtn.dataset.id)
+
+		console.log(this.todosContainerDiv, 'from addTodo')
 
 		const todosContainerDivCopy = this.todosContainerDiv
 
@@ -84,18 +87,8 @@ export class Todos {
 			date: fullDateFromInput,
 			id: this.deleteTodoBtn.dataset.id
 		})
+		console.log(this.editTodoBtn.dataset.id)
 
-		this.deleteTodoBtn.addEventListener('click', (e) => {
-			this.todos = this.todos
-		.filter(todo => todo.id !== e.target.getAttribute('data-id'))
-		
-			todosContainerDivCopy.remove()
-
-			if (this.todos.length === 0) {
-				this.clearAllTodos.remove()
-			}
-			console.log(this.todos, 'from del todo btns')
-		})
 		
 		//creating the divs for the todos
 		this.todoTitleDiv = document.createElement('div')
@@ -107,10 +100,10 @@ export class Todos {
 		this.todoPriorityDiv = document.createElement('div')
 		this.todoPriorityDiv.classList.add('todo-priority')
 		//making copy of the divs and their values to make separation
-		const todoTitleCopy = this.todoTitleDiv
-		const todoDescriptionCopy = this.todoDescriptionDiv
-		const todoDateInputCopy = this.taskDateInput.value
-		const todoPriorityCopy = this.taskPriorityInput;
+		// const todoTitleCopy = this.todoTitleDiv
+		// const todoDescriptionCopy = this.todoDescriptionDiv
+		// const todoDateInputCopy = this.taskDateInput.value
+		// const todoPriorityCopy = this.taskPriorityInput;
 		//^actually using the this.todos array to get the values
 		
 		//set the todo's card text depending on the input
@@ -118,7 +111,6 @@ export class Todos {
 		this.todoDescriptionDiv.textContent = this.taskDescriptionInput.value
 		this.todoDateDiv.textContent = `Deadline: ${fullDateFromInput}`
 		this.todoPriorityDiv.textContent = priorityValue
-
 
 		this.completeCheckbox.addEventListener('click', (e) => {	
 			if (e.target.checked) {
@@ -176,12 +168,12 @@ export class EditTodos extends Todos {
 		const lowPriorityBtn = document.getElementById('change-low')
 		const highPriorityBtn = document.getElementById('change-high')
 
+		
 		this.editTodoBtn.addEventListener('click', (e) => {
 			this.containerEditTodo.classList.toggle('removed');
 			this.containerEditTodo.appendChild(this.submitChangedTodoBtn)
-			// ^ add eventListener for it so that changes appear in
-			//the corresponding todos card
 
+			console.log(this.submitChangedTodoBtn)
 			//this.editTitleInput.value = todoTitleCopy.textContent;
 			// this.editDateInput.value = todoDateInputCopy
 
@@ -202,6 +194,33 @@ export class EditTodos extends Todos {
 				}
 			  }
 
+			  this.submitChangedTodoBtn.addEventListener('click', (evt) => {
+				  for (let i = 0; i < this.todos.length; i++) {
+					if (this.todos[i].id === evt.target.getAttribute('data-id')) {
+						console.log(this.todos[i].id)
+				  	this.todoTitleDiv.textContent = this.editTitleInput.value
+					//console.log('from submit changedtodo btn', e.target.getAttribute('data-id'))
+				//update this.todos array's corresponding index with
+				//the new title, description etc.	
+				
+				}
+
+				}
+				})
+		})
+	}
+
+	deleteTodos() {
+		this.deleteTodoBtn.addEventListener('click', (e) => {	
+			e.target.parentElement.remove();		
+			this.todos = this.todos
+		.filter(todo => todo.id !== e.target.getAttribute('data-id'))
+			
+			//todosContainerDivCopy.remove()
+			if (this.todos.length === 0) {
+				this.clearAllTodos.remove()
+			}
+			console.log(this.todos, 'from del todo btns')
 		})
 	}
 
